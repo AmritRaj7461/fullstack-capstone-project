@@ -1,0 +1,3 @@
+curl "http://localhost:3000/api/search?category=Electronics"
+
+[{"_id":"69f48e706ac1028c73a7b89d","name":"Laptop","category":"Electronics","price":500},{"_id":"69f48e706ac1028c73a7b89e","name":"Phone","category":"Electronics","price":300},{"_id":"69f48e706ac1028c73a7b89f","name":"Headphones","category":"Electronics","price":50},{"_id":"69f48e706ac1028c73a7b8a0","name":"Keyboard","category":"Electronics","price":40},{"_id":"69f48e706ac1028c73a7b8a1","name":"Mouse","category":"Electronics","price":20}]

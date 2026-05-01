@@ -1,29 +1,26 @@
 const express = require("express");
 const { router, connectToDatabase } = require("./giftRoutes");
 const searchRoutes = require("./searchRoutes");
-const { MongoClient } = require("mongodb");
+const authRoutes = require("./authRoutes");
 
 const app = express();
-const uri = "mongodb://localhost:27017";
 
-let db;
+app.use(express.json());
 
-async function start() {
-  const client = new MongoClient(uri);
-  await client.connect();
-  db = client.db("giftlink");
+// 🔥 Connect DB from giftRoutes
+connectToDatabase();
 
-  app.locals.db = db;
+// 🔥 Routes
+app.use(router); // /api/gifts routes
+app.use(searchRoutes); // /api/search
+app.use(authRoutes); // /api/register, /api/login
 
-  app.use(express.json());
-  app.use(router);
-  app.use(searchRoutes);
+// Optional test route
+app.get("/", (req, res) => {
+  res.send("API is working");
+});
 
-  app.get("/api/search", (req, res) => {
-    res.send("Search route working");
-  });
-
-  app.listen(3000, () => console.log("Server running"));
-}
-
-start();
+// 🔥 Start server
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
+});
